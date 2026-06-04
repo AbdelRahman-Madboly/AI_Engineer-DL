@@ -1,0 +1,89 @@
+# .gitignore — AI_Engineer-DL
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ── Conda environments ────────────────────────────────────────────────────────
+# environment.yml      → NOT ignored — commit this, it's the clean spec
+# environment_lock.yml → ignored — machine-specific, never commit
+environment_lock.yml
+.env
+.venv
+venv/
+env/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDEs ──────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ── Build artifacts ───────────────────────────────────────────────────────────
+*.egg-info/
+dist/
+build/
+
+# ── DL model artifacts (generated — not source) ───────────────────────────────
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.pt
+*.pth
+*.onnx
+*.npy
+*.npz
+*.weights
+*.ckpt
+*.safetensors
+
+# ── TensorFlow / Keras ────────────────────────────────────────────────────────
+saved_model/
+*.pb
+*.tflite
+
+# ── Data ──────────────────────────────────────────────────────────────────────
+# Large or raw data files are not tracked.
+# To force-track a specific small file: git add -f data/myfile.csv
+data/
+*.csv
+*.parquet
+*.feather
+*.db
+*.sqlite
+*.tar
+*.tar.gz
+
+# ── Logs and outputs ──────────────────────────────────────────────────────────
+logs/
+*.log
+runs/
+results/
+outputs/
+wandb/
+mlruns/
+
+# ── Personal / local only ─────────────────────────────────────────────────────
+# These folders exist on your machine but are not part of the public repo.
+_archive/
+_prompts/
+_course_content/
+GIT_GUIDE.md
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+*.js
+*.map

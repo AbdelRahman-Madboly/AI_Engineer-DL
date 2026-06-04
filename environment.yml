@@ -1,0 +1,80 @@
+# environment.yml — AI_Engineer-DL
+# ──────────────────────────────────────────────────────────────────────────────
+# WHAT THIS FILE IS:
+#   The human-written specification for the dl_env conda environment.
+#   Defines packages without pinning exact versions — conda resolves compatible
+#   versions automatically based on your CUDA driver.
+#
+# HOW TO USE IT:
+#   Create env:        conda env create -f environment.yml
+#   Update env:        conda env update -f environment.yml --prune
+#   Activate:          conda activate dl_env
+#   Register kernel:   python -m ipykernel install --user --name dl_env --display-name "Python (dl_env)"
+#
+# GPU SETUP NOTE:
+#   Both TensorFlow and PyTorch use the same CUDA/cuDNN installed by conda.
+#   The pytorch channel handles the CUDA-compatible PyTorch build automatically.
+#   Do NOT install a separate CUDA toolkit from nvidia.com — conda manages it.
+#   Verify GPU is visible after creation:
+#     python -c "import torch; print(torch.cuda.is_available())"
+#     python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+#
+# CONFLICT PREVENTION:
+#   TF and PyTorch both need cuDNN. Installing via conda (not pip) lets conda
+#   resolve a single compatible version for both. Never pip-install either
+#   framework after creating this env — always update this file and re-create.
+# ──────────────────────────────────────────────────────────────────────────────
+
+name: dl_env
+channels:
+  - pytorch             # must be first — provides CUDA-compatible PyTorch builds
+  - nvidia              # provides cudatoolkit, cudnn
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10         # pinned major.minor — TF and PyTorch both support 3.10
+  - pip                 # <-- ADDED: fixes the pip nagging warning
+
+  # ── CUDA runtime (managed by conda — do not install separately) ───────────
+  - cudatoolkit=11.8    # compatible with both TF 2.13+ and PyTorch 2.x
+  - cudnn               # <-- CHANGED: removed =8.6 so conda resolves it on Windows
+
+  # ── Core scientific stack ──────────────────────────────────────────────────
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scipy
+  - scikit-learn        # preprocessing and evaluation metrics only (not training)
+
+  # ── TensorFlow (Courses 1–5: primary framework) ───────────────────────────
+  # Install via pip — conda-forge TF does not link to the pytorch-channel CUDA
+  # ── PyTorch (advanced projects + comparison notebooks) ────────────────────
+  - pytorch             # conda pytorch channel resolves the CUDA 11.8 build
+  - torchvision
+  - torchaudio
+
+  # ── Image processing ───────────────────────────────────────────────────────
+  - pillow
+  - opencv              # computer vision — CNNs course (Course 4)
+
+  # ── Jupyter ────────────────────────────────────────────────────────────────
+  - jupyter
+  - jupyterlab
+  - ipykernel
+  - ipywidgets
+
+  # ── Utilities ──────────────────────────────────────────────────────────────
+  - tqdm                # progress bars — training loop notebooks
+  - h5py                # HDF5 — Keras model saving
+  - sympy               # symbolic math — backprop derivation notebooks
+  - einops              # tensor manipulation — used in transformer implementations
+
+  # ── pip-only packages (install after conda resolves CUDA) ─────────────────
+  - pip:
+    - tensorflow==2.13  # pinned — most recent version supporting CUDA 11.8
+    - keras             # standalone Keras (matches TF 2.13)
+    - transformers      # HuggingFace — Course 5: NER, QA, pre-trained models
+    - datasets          # HuggingFace datasets
+    - accelerate        # HuggingFace training utilities
+    - wandb             # experiment tracking for advanced projects
