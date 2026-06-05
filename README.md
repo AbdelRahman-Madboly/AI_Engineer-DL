@@ -3,17 +3,32 @@
 **Author:** Abdel Rahman Madboly
 **GitHub:** https://github.com/AbdelRahman-Madboly/AI_Engineer-DL
 **Local:** `D:\AI_Engineer-DL`
-**Environment:** `dl_env` (see `environment.yml`)
+**Environment:** `dl_env` — TensorFlow + PyTorch + CUDA in one environment
+**Companion repo:** [AI_Engineer-ML](https://github.com/AbdelRahman-Madboly/AI_Engineer-ML) — complete that first
 
 ---
 
 ## What This Repo Is
 
-A deep learning learning repository built by implementing every concept from scratch in Jupyter notebooks. Every notebook is written by Abdel Rahman — not AI-generated. Every concept is explained before it is coded. The goal is to understand deep learning deeply enough to implement architectures from scratch, explain every design decision in an interview, and apply them to real projects.
+A deep learning learning repository built by implementing every concept from scratch in Jupyter
+notebooks. Every notebook is written by Abdel Rahman — not AI-generated. Every concept is
+explained before it is coded. The goal is to understand deep learning deeply enough to implement
+architectures from scratch, explain every design decision in an interview, and apply them to
+real projects.
 
-This repo follows the same structure and standards as `AI_Engineer-ML` — the same notebook format (7 sections), the same notes style, the same exercise scaffold pattern.
+This repo follows the same standards as `AI_Engineer-ML` — the same 7-section notebook format,
+the same notes style, the same exercise scaffold pattern.
 
-**Companion repo:** `AI_Engineer-ML` (classical ML, math foundations) — complete that first.
+---
+
+## Prerequisites
+
+| Topic | Repo section |
+|-------|-------------|
+| Derivatives, gradient descent, chain rule | `AI_Engineer-ML / 01_math_foundations / calculus` |
+| Matrix operations, eigenvectors, PCA | `AI_Engineer-ML / 01_math_foundations / linear_algebra` |
+| NumPy, Pandas, Matplotlib | `AI_Engineer-ML / 02_data_tools` |
+| Cost functions, regression pipelines | `AI_Engineer-ML / 03_linear_regression` |
 
 ---
 
@@ -22,84 +37,103 @@ This repo follows the same structure and standards as `AI_Engineer-ML` — the s
 ```
 AI_Engineer-DL/
 │
-├── 01_neural_networks_and_dl/          ⏳ In progress
-│   ├── week_01_intro_to_dl/
-│   ├── week_02_logistic_regression/
-│   ├── week_03_shallow_neural_network/
-│   ├── week_04_deep_neural_network/
+├── 01_neural_networks_and_dl/          ⏳ In progress — start here
+│   ├── intro_to_dl/
+│   │   ├── notebooks/
+│   │   ├── notes/
+│   │   ├── exercises/
+│   │   └── images/
+│   ├── logistic_regression/
+│   ├── shallow_neural_network/
+│   ├── deep_neural_network/
 │   └── docs/
 │
 ├── 02_improving_deep_nn/               ⏳ Not started
-│   ├── week_01_practical_aspects/
-│   ├── week_02_optimization_algorithms/
-│   ├── week_03_hyperparameter_tuning/
+│   ├── practical_aspects/
+│   ├── optimization_algorithms/
+│   ├── hyperparameter_tuning/
 │   └── docs/
 │
 ├── 03_structuring_ml_projects/         ⏳ Not started
-│   ├── week_01_ml_strategy_1/
-│   ├── week_02_ml_strategy_2/
+│   ├── ml_strategy_1/                  ← notes + images only (no notebooks)
+│   ├── ml_strategy_2/
 │   └── docs/
 │
 ├── 04_convolutional_neural_networks/   ⏳ Not started
-│   ├── week_01_foundations/
-│   ├── week_02_deep_cnn_models/
-│   ├── week_03_object_detection/
-│   ├── week_04_special_applications/
+│   ├── foundations/
+│   ├── deep_cnn_models/
+│   ├── object_detection/
+│   ├── special_applications/
 │   └── docs/
 │
 ├── 05_sequence_models/                 ⏳ Not started
-│   ├── week_01_recurrent_neural_networks/
-│   ├── week_02_nlp_word_embeddings/
-│   ├── week_03_sequence_attention/
-│   ├── week_04_transformers/
+│   ├── recurrent_neural_networks/
+│   ├── nlp_word_embeddings/
+│   ├── sequence_attention/
+│   ├── transformers/
 │   └── docs/
 │
 ├── projects/                           ⏳ Planned
-├── data/
-├── docs/                               ← Repo-level reference guides
-├── environment.yml                     ← dl_env spec — always commit this
+├── data/                               ← gitignored
+├── docs/                               ← repo-level reference guides
+│
+├── _prompts/                           ← gitignored — local only
+│   ├── DL_REPO_SKILL.md
+│   ├── HOW_TO_USE.md
+│   ├── skills/
+│   │   ├── LESSON_SKILL.md
+│   │   ├── NOTES_SKILL.md
+│   │   ├── NOTEBOOKS_SKILL.md
+│   │   ├── EXERCISES_SKILL.md
+│   │   ├── DOCX_SKILL.md
+│   │   └── REPO_SKILL.md
+│   └── courses/
+│       ├── COURSE_01.md  ← Neural Networks and Deep Learning
+│       ├── COURSE_02.md  ← Improving Deep Neural Networks
+│       ├── COURSE_03.md  ← Structuring ML Projects
+│       ├── COURSE_04.md  ← CNNs
+│       └── COURSE_05.md  ← Sequence Models
+│
+├── _course_content/                    ← gitignored — subtitle files (local only)
+│
+├── .gitignore
+├── environment.yml
 ├── PROGRESS.md
 ├── ROADMAP.md
+├── scaffold.py
 └── README.md
 ```
 
-Each week folder follows this pattern:
+Each topic folder follows this pattern:
 ```
-week_NN_topic_name/
-├── notebooks/      NN_topic_name.ipynb
-├── notes/          NN_topic_name_notes.md
-├── exercises/      NN_topic_name_exN_short_label.py
-└── images/         NN_topic_short_desc.png
+topic_name/
+├── notebooks/    NN_topic.ipynb
+├── notes/        NN_topic_notes.md
+├── exercises/    NN_topic_exN_label.py
+└── images/       NN_topic_description.png
 ```
 
----
-
-## Prerequisites
-
-Before starting this repo, make sure you have completed or are comfortable with:
-
-- `AI_Engineer-ML / 01_math_foundations / linear_algebra` — matrix operations, eigenvalues, PCA
-- `AI_Engineer-ML / 01_math_foundations / calculus` — derivatives, gradient descent, chain rule
-- `AI_Engineer-ML / 02_data_tools` — NumPy, Pandas, Matplotlib, sklearn basics
-- `AI_Engineer-ML / 03_linear_regression` — cost functions, gradient descent, regression pipelines
-
-The math behind backpropagation is calculus. The math behind weight matrices is linear algebra. You need both before this repo makes sense.
+Course 3 (`structuring_ml_projects`) is concepts-only — notes and images only.
 
 ---
 
 ## Environment Setup
 
 ```bash
-# Create the environment (run once)
+# 1. Create the environment (run once — takes ~10 min with GPU packages)
 conda env create -f environment.yml
 
-# Activate
+# 2. Activate
 conda activate dl_env
 
-# Register as a Jupyter kernel
+# 3. Register as a Jupyter kernel
 python -m ipykernel install --user --name dl_env --display-name "Python (dl_env)"
 
-# Launch
+# 4. Verify GPU is visible for both frameworks
+python -c "import torch; print('PyTorch CUDA:', torch.cuda.is_available())"
+python -c "import tensorflow as tf; print('TF GPU:', tf.config.list_physical_devices('GPU'))"
+
+# 5. Launch
 cd D:\AI_Engineer-DL
 jupyter notebook
 ```
@@ -110,44 +144,33 @@ Always select **Python (dl_env)** as the kernel before running any notebook.
 
 ## Notebook Standard — 7 Sections Every Time
 
-Every notebook in this repo follows the exact same structure:
-
 ```
 # NN — Topic Name
-
-## 1. What Is This?
-   Plain language. No code. What, why, where in deep learning.
-   Real-world connection — one of Abdel Rahman's projects.
-   Concept orientation table.
-
-## 2. The Math
-   LaTeX formulas with word-for-word explanation of every symbol.
-   Worked examples showing the arithmetic, not just the result.
-   Derivations where the concept requires it (e.g. backprop).
-
-## 3. Build From Scratch
-   One sub-concept per markdown+code cell pair.
-   🔮 Predict before you run.
-   # YOUR CODE HERE — all task cells.
-   💡 Reflect after non-obvious outputs.
-   ✅ Self-check at natural breakpoints.
-
-## 4. Library / Framework Version
-   TensorFlow/Keras or NumPy equivalent.
-   Verify scratch matches the framework.
-
-## 5. Visualisation
-   Pre-filled. Save to ../images/NN_topic_short_description.png
-
-## 6. Revision Corner
-   One-sentence definition (interview answer).
-   Why it exists — what problem it solves.
-   3-column gotcha table: Question | Common mistake | The reality.
-
-## 7. Exercises
-   3 exercises: ⭐ Recall · ⭐⭐ Apply · ⭐⭐⭐ Scenario.
-   Solutions in exercises/ — never in the notebook.
+## 1. What Is This?        Plain language + real-world project connection
+## 2. The Math             Formulas with full symbol explanations + worked examples
+## 3. Build From Scratch   🔮 Predict → # YOUR CODE HERE → 💡 Reflect → ✅ Self-check
+## 4. Library Version      TensorFlow/Keras or NumPy — verify scratch matches
+## 5. Visualisation        Pre-filled — saves to ../images/
+## 6. Revision Corner      Definition · Why it exists · 3-column gotcha table
+## 7. Exercises            ⭐ Recall · ⭐⭐ Apply · ⭐⭐⭐ Scenario — solutions in exercises/
 ```
+
+---
+
+## Real-World Connections
+
+| Concept | Project |
+|---------|---------|
+| Sigmoid / binary classification | WaveMamba-DF: final layer outputs deepfake probability |
+| Matrix multiplication | CloudyDrive: every YOLO layer is Wᵀx + b |
+| Backprop through layers | FarmLens: gradients flow back through EfficientNet |
+| Vectorization across batch | Any training loop: process all images in a batch at once |
+| ReLU activation | CloudyDrive: all hidden layers use ReLU |
+| Dropout regularization | WaveMamba-DF: prevents overfitting on deepfake dataset |
+| Convolution | CloudyDrive: YOLOv11 feature extraction is pure convolution |
+| LSTM | Nexus: sequence modeling for multi-turn agent memory |
+| Attention | WaveMamba-DF: Boundary Attention Module |
+| Transformer | Nexus: HuggingFace models for text understanding |
 
 ---
 
@@ -155,44 +178,22 @@ Every notebook in this repo follows the exact same structure:
 
 | Course | Notebooks | Notes | Exercises | Docs | Status |
 |--------|-----------|-------|-----------|------|--------|
-| `01_neural_networks_and_dl` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ |
+| `01_neural_networks_and_dl` | 0 / 12 | 0 / 12 | 0 / 12 | 0 / 4 | ⏳ |
 | `02_improving_deep_nn` | 0 / 7 | 0 / 7 | 0 / 7 | 0 / 3 | ⏳ |
 | `03_structuring_ml_projects` | — | 0 / 4 | — | 0 / 2 | ⏳ |
 | `04_convolutional_neural_networks` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ |
 | `05_sequence_models` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ |
 
-Status: ⬜ Not started · 🟡 In progress · ✅ Complete
-
 ---
 
-## Git Rules
+## Git Workflow
 
-```
-<type>(dl): <file or section name> — <one line of what it covers>
-
-Types:
-  feat      → new notebook content
-  exercise  → exercise scaffold or solutions
-  fix       → mistake corrected
-  refactor  → restructured without content change
-  docs      → README, notes, PROGRESS, or DOCX update
-  scaffold  → new folder structure created
-```
-
-**Examples:**
 ```bash
-feat(dl): add 01_binary_classification — vectorized logistic regression, sigmoid from scratch
-feat(dl): add 02_shallow_nn — forward/backward pass, activation functions from scratch
-exercise(dl): scaffold week02 exercises — all 3 ready
-docs(dl): update PROGRESS after course 1 week 2 complete
-```
-
-**Workflow after every session:**
-```bash
-git add 01_neural_networks_and_dl/week_02_logistic_regression/notebooks/01_binary_classification.ipynb
-git add 01_neural_networks_and_dl/week_02_logistic_regression/notes/01_binary_classification_notes.md
-git commit -m "feat(dl): add 01_binary_classification — ..."
+# After every session — specific files only, never git add .
+git add 01_neural_networks_and_dl/logistic_regression/notebooks/01_binary_classification.ipynb
+git add 01_neural_networks_and_dl/logistic_regression/notes/01_binary_classification_notes.md
+git commit -m "feat(dl): add 01_binary_classification — sigmoid, cross-entropy, forward pass"
 git push
 ```
 
-Never `git add .` and never `git commit -m "update"`.
+Commit types: `feat` · `exercise` · `fix` · `refactor` · `docs` · `scaffold`

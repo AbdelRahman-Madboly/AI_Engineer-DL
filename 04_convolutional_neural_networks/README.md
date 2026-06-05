@@ -1,29 +1,25 @@
 # Course 4 — Convolutional Neural Networks
 
 **Status:** ⏳ Not started
-**Prerequisite:** Course 2 complete (Course 3 can be concurrent)
-**Next course:** `05_sequence_models`
+**Prerequisite:** Course 02 complete (Course 03 can run concurrently)
+**Next:** `05_sequence_models`
 
 ---
 
-## Why This Course Exists
+## Topics
 
-CNNs are the backbone of computer vision. This course explains how convolution
-extracts spatial features, how depth creates hierarchical representations, and
-how modern architectures like ResNets and YOLO are built. Directly relevant to
-CloudyDrive (YOLOv11) and FarmLens (EfficientNet).
+| Folder | Notebooks | Status |
+|--------|-----------|--------|
+| `foundations/` | 2 | ⬜ |
+| `deep_cnn_models/` | 2 | ⬜ |
+| `object_detection/` | 2 | ⬜ |
+| `special_applications/` | 2 | ⬜ |
 
----
+## DOCX Guides (in `docs/`)
 
-## Notebooks
-
-| Week | # | Notebook | Core concept | Status |
-|------|---|----------|-------------|--------|
-| 1 | 01 | `01_convolution_operation.ipynb` | Filters, stride, padding, output shape | ⬜ |
-| 1 | 02 | `02_pooling_and_cnn_architecture.ipynb` | Max/avg pooling, full CNN structure | ⬜ |
-| 2 | 01 | `01_classic_architectures.ipynb` | LeNet, AlexNet, VGG — why depth matters | ⬜ |
-| 2 | 02 | `02_resnets_and_inception.ipynb` | Skip connections, 1×1 convolutions | ⬜ |
-| 3 | 01 | `01_object_detection_and_yolo.ipynb` | YOLO, anchor boxes, NMS | ⬜ |
-| 3 | 02 | `02_bounding_box_prediction.ipynb` | Localization, IoU, mAP | ⬜ |
-| 4 | 01 | `01_face_recognition.ipynb` | One-shot learning, Siamese networks, triplet loss | ⬜ |
-| 4 | 02 | `02_neural_style_transfer.ipynb` | Content and style cost functions | ⬜ |
+| File | Covers |
+|------|--------|
+| `Deep_Learning_Part_10_CNN_Foundations.docx` | Convolution, pooling, CNN architecture |
+| `Deep_Learning_Part_11_Deep_CNN_Models.docx` | ResNets, Inception, skip connections |
+| `Deep_Learning_Part_12_Object_Detection.docx` | YOLO, anchor boxes, NMS, IoU |
+| `Deep_Learning_Part_13_CNN_Applications.docx` | Face recognition, neural style transfer |

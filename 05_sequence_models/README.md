@@ -1,29 +1,25 @@
 # Course 5 — Sequence Models
 
 **Status:** ⏳ Not started
-**Prerequisite:** Course 2 complete
-**Note:** This is the final course. Leads into transformer architecture and LLM engineering.
+**Prerequisite:** Course 02 complete
+**Note:** Final course — leads directly into LLM engineering and transformer-based projects.
 
 ---
 
-## Why This Course Exists
+## Topics
 
-Sequential data — text, audio, time series — requires architectures that can
-handle variable-length inputs and remember context over time. This course builds
-from RNNs through LSTMs to attention and transformers — the architecture
-behind every modern language model.
+| Folder | Notebooks | Status |
+|--------|-----------|--------|
+| `recurrent_neural_networks/` | 2 | ⬜ |
+| `nlp_word_embeddings/` | 2 | ⬜ |
+| `sequence_attention/` | 2 | ⬜ |
+| `transformers/` | 2 | ⬜ |
 
----
+## DOCX Guides (in `docs/`)
 
-## Notebooks
-
-| Week | # | Notebook | Core concept | Status |
-|------|---|----------|-------------|--------|
-| 1 | 01 | `01_rnn_forward_backward.ipynb` | RNN forward/backward pass | ⬜ |
-| 1 | 02 | `02_gru_and_lstm.ipynb` | Vanishing gradients, GRU, LSTM gates | ⬜ |
-| 2 | 01 | `01_word_embeddings.ipynb` | Word2Vec, GloVe, embedding matrix | ⬜ |
-| 2 | 02 | `02_sentiment_and_debiasing.ipynb` | Text classification, bias in embeddings | ⬜ |
-| 3 | 01 | `01_encoder_decoder.ipynb` | Seq2seq architecture, beam search | ⬜ |
-| 3 | 02 | `02_attention_mechanism.ipynb` | Attention weights, alignment, context vector | ⬜ |
-| 4 | 01 | `01_transformer_architecture.ipynb` | Self-attention, multi-head attention, positional encoding | ⬜ |
-| 4 | 02 | `02_huggingface_transformers.ipynb` | Pre-trained models, fine-tuning, NER, QA | ⬜ |
+| File | Covers |
+|------|--------|
+| `Deep_Learning_Part_14_RNNs_and_LSTMs.docx` | RNN forward/backward, GRU, LSTM gates |
+| `Deep_Learning_Part_15_Word_Embeddings.docx` | Word2Vec, GloVe, embedding matrix |
+| `Deep_Learning_Part_16_Attention.docx` | Encoder-decoder, beam search, attention mechanism |
+| `Deep_Learning_Part_17_Transformers.docx` | Self-attention, multi-head attention, positional encoding |

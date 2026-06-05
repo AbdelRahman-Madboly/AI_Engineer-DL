@@ -1,6 +1,6 @@
-# Week 3 — Shallow Neural Network
+# shallow_neural_network
 
-**Section path:** `01_neural_networks_and_dl/week_03_shallow_neural_network/`
+**Course:** 01_neural_networks_and_dl
 **Status:** ⬜ Not started
 
 ---
@@ -9,14 +9,14 @@
 
 | # | File | Core concept | Status |
 |---|------|-------------|--------|
-| 01 | `01_neural_network_representation.ipynb` | Layers, activations, forward pass notation, shape tracking | ⬜ |
-| 02 | `02_activation_functions.ipynb` | sigmoid, tanh, ReLU, leaky ReLU — derivatives and when to use each | ⬜ |
+| 01 | `01_neural_network_representation.ipynb` | Layer notation, shapes, vectorized forward pass | ⬜ |
+| 02 | `02_activation_functions.ipynb` | sigmoid, tanh, ReLU, leaky ReLU — derivatives, when to use each | ⬜ |
 | 03 | `03_backprop_shallow_nn.ipynb` | Full 2-layer backprop derivation, random initialization | ⬜ |
 
-## Key concepts to be able to implement from scratch after this week
+## Implement from scratch (benchmark)
 
-- [ ] Forward pass through a 2-layer NN: shapes tracked at every step
+- [ ] Forward pass through a 2-layer NN with shapes tracked at every step
 - [ ] Tanh derivative: 1 - a²
 - [ ] ReLU derivative: 1 if z > 0, 0 otherwise
-- [ ] Backprop through a 2-layer NN: dA[1], dZ[1], dW[1], db[1]
-- [ ] Why random initialization: why all-zeros fails
+- [ ] Full 2-layer backprop: dZ[2], dW[2], db[2], dZ[1], dW[1], db[1]
+- [ ] Why all-zeros initialization fails and why random init works

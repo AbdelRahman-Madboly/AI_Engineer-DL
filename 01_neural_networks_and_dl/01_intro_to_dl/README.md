@@ -1,6 +1,6 @@
-# Week 1 — Introduction to Deep Learning
+# intro_to_dl
 
-**Section path:** `01_neural_networks_and_dl/week_01_intro_to_dl/`
+**Course:** 01_neural_networks_and_dl
 **Status:** ⬜ Not started
 
 ---
@@ -11,9 +11,9 @@
 |---|------|-------------|--------|
 | 01 | `01_what_is_a_neural_network.ipynb` | ReLU, hidden layers, supervised learning, why DL now | ⬜ |
 
-## Key concepts to be able to explain after this week
+## Key concepts after this topic
 
-- What a neuron is as a mathematical function
-- Why ReLU replaced sigmoid in hidden layers
-- Three reasons DL is taking off (data, compute, algorithms)
-- Difference between standard NN, CNN, and RNN use cases
+- A neuron as a mathematical function: weighted sum → nonlinearity → scalar output
+- Why ReLU replaced sigmoid in hidden layers (vanishing gradient)
+- Three reasons DL is taking off: data scale, compute scale, algorithmic improvements
+- When to use standard NN vs CNN vs RNN
