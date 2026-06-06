@@ -37,47 +37,52 @@ the same notes style, the same exercise scaffold pattern.
 ```
 AI_Engineer-DL/
 │
-├── 01_neural_networks_and_dl/          ⏳ In progress — start here
-│   ├── intro_to_dl/                    ✅ Complete
+├── 01_neural_networks_and_dl/               ⏳ In progress
+│   ├── 01_intro_to_dl/                      ✅ Complete
 │   │   ├── notebooks/
 │   │   ├── notes/
 │   │   ├── exercises/
 │   │   └── images/
-│   ├── logistic_regression/            ⏳ In progress — notebooks + notes done
-│   ├── shallow_neural_network/
-│   ├── deep_neural_network/
+│   ├── 02_logistic_regression/              ⏳ In progress — exercises remaining
+│   │   ├── notebooks/
+│   │   ├── notes/
+│   │   ├── exercises/
+│   │   ├── images/
+│   │   └── docs/
+│   ├── 03_shallow_neural_network/           ⬜ Not started
+│   ├── 04_deep_neural_network/              ⬜ Not started
+│   ├── docs/                                ← section-level DOCX guides
+│   └── README.md
+│
+├── 02_improving_deep_nn/                    ⬜ Not started
+│   ├── 01_practical_aspects/
+│   ├── 02_optimization_algorithms/
+│   ├── 03_hyperparameter_tuning/
 │   └── docs/
 │
-├── 02_improving_deep_nn/               ⏳ Not started
-│   ├── practical_aspects/
-│   ├── optimization_algorithms/
-│   ├── hyperparameter_tuning/
+├── 03_structuring_ml_projects/              ⬜ Not started
+│   ├── 01_ml_strategy_1/                    ← notes + images only (no notebooks)
+│   ├── 02_ml_strategy_2/
 │   └── docs/
 │
-├── 03_structuring_ml_projects/         ⏳ Not started
-│   ├── ml_strategy_1/                  ← notes + images only (no notebooks)
-│   ├── ml_strategy_2/
+├── 04_convolutional_neural_networks/        ⬜ Not started
+│   ├── 01_foundations/
+│   ├── 02_deep_cnn_models/
+│   ├── 03_object_detection/
+│   ├── 04_special_applications/
 │   └── docs/
 │
-├── 04_convolutional_neural_networks/   ⏳ Not started
-│   ├── foundations/
-│   ├── deep_cnn_models/
-│   ├── object_detection/
-│   ├── special_applications/
+├── 05_sequence_models/                      ⬜ Not started
+│   ├── 01_recurrent_neural_networks/
+│   ├── 02_nlp_word_embeddings/
+│   ├── 03_sequence_attention/
+│   ├── 04_transformers/
 │   └── docs/
 │
-├── 05_sequence_models/                 ⏳ Not started
-│   ├── recurrent_neural_networks/
-│   ├── nlp_word_embeddings/
-│   ├── sequence_attention/
-│   ├── transformers/
-│   └── docs/
+├── projects/                                ⬜ Planned
+├── docs/                                    ← repo-level reference guides
 │
-├── projects/                           ⏳ Planned
-├── data/                               ← gitignored
-├── docs/                               ← repo-level reference guides
-│
-├── _prompts/                           ← gitignored — local only
+├── _prompts/                                ← gitignored — local only
 │   ├── DL_REPO_SKILL.md
 │   ├── HOW_TO_USE.md
 │   ├── skills/
@@ -88,25 +93,24 @@ AI_Engineer-DL/
 │   │   ├── DOCX_SKILL.md
 │   │   └── REPO_SKILL.md
 │   └── courses/
-│       ├── COURSE_01.md  ← Neural Networks and Deep Learning
-│       ├── COURSE_02.md  ← Improving Deep Neural Networks
-│       ├── COURSE_03.md  ← Structuring ML Projects
-│       ├── COURSE_04.md  ← CNNs
-│       └── COURSE_05.md  ← Sequence Models
+│       ├── COURSE_01.md
+│       ├── COURSE_02.md
+│       ├── COURSE_03.md
+│       ├── COURSE_04.md
+│       └── COURSE_05.md
 │
-├── _course_content/                    ← gitignored — subtitle files (local only)
+├── _course_content/                         ← gitignored — subtitle files (local only)
 │
 ├── .gitignore
 ├── environment.yml
 ├── PROGRESS.md
 ├── ROADMAP.md
-├── scaffold.py
 └── README.md
 ```
 
 Each topic folder follows this pattern:
 ```
-topic_name/
+NN_topic_name/
 ├── notebooks/    NN_topic.ipynb
 ├── notes/        NN_topic_notes.md
 ├── exercises/    NN_topic_exN_label.py
@@ -114,7 +118,7 @@ topic_name/
 └── README.md     section tracker
 ```
 
-Course 3 (`structuring_ml_projects`) is concepts-only — notes and images only.
+Course 3 (`structuring_ml_projects`) is concepts-only — notes and images, no notebooks.
 
 ---
 
@@ -179,11 +183,20 @@ Always select **Python (dl_env)** as the kernel before running any notebook.
 
 | Course | Notebooks | Notes | Exercises | Docs | Status |
 |--------|-----------|-------|-----------|------|--------|
-| `01_neural_networks_and_dl` | 6 / 12 | 6 / 12 | 0 / 12 | 0 / 4 | ⏳ In progress |
-| `02_improving_deep_nn` | 0 / 7 | 0 / 7 | 0 / 7 | 0 / 3 | ⏳ Not started |
-| `03_structuring_ml_projects` | — | 0 / 4 | — | 0 / 2 | ⏳ Not started |
-| `04_convolutional_neural_networks` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ Not started |
-| `05_sequence_models` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ Not started |
+| `01_neural_networks_and_dl` | 6 / 12 | 6 / 12 | 3 / 12 | 3 / 4 | ⏳ In progress |
+| `02_improving_deep_nn` | 0 / 7 | 0 / 7 | 0 / 7 | 0 / 3 | ⬜ Not started |
+| `03_structuring_ml_projects` | — | 0 / 4 | — | 0 / 2 | ⬜ Not started |
+| `04_convolutional_neural_networks` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⬜ Not started |
+| `05_sequence_models` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⬜ Not started |
+
+### Course 01 detail
+
+| Section | Notebooks | Notes | Exercises | Docs | Status |
+|---------|-----------|-------|-----------|------|--------|
+| `01_intro_to_dl` | 1 / 1 | 1 / 1 | 3 / 3 | 1 / 1 | ✅ Complete |
+| `02_logistic_regression` | 5 / 5 | 5 / 5 | 0 / 15 | 2 / 2 | ⏳ Exercises remaining |
+| `03_shallow_neural_network` | 0 / 3 | 0 / 3 | 0 / 9 | 0 / 1 | ⬜ Not started |
+| `04_deep_neural_network` | 0 / 3 | 0 / 3 | 0 / 9 | 0 / 1 | ⬜ Not started |
 
 ---
 
@@ -191,9 +204,8 @@ Always select **Python (dl_env)** as the kernel before running any notebook.
 
 ```bash
 # After every session — specific files only, never git add .
-git add 01_neural_networks_and_dl/logistic_regression/notebooks/01_binary_classification.ipynb
-git add 01_neural_networks_and_dl/logistic_regression/notes/01_binary_classification_notes.md
-git commit -m "feat(dl): logistic_regression/01_binary_classification — feature vectors, matrix stacking X and Y"
+git add 01_neural_networks_and_dl/02_logistic_regression/exercises/01_binary_classification_ex1_feature_vector.py
+git commit -m "exercise(dl): logistic_regression/01_binary_classification exercises — all 3 ready"
 git push
 ```
 

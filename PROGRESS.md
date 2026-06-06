@@ -18,14 +18,17 @@
 
 ## Course 01 — Neural Networks and Deep Learning
 
-### intro_to_dl
+### 01_intro_to_dl ✅ Complete
 | Artifact | File | Status |
 |----------|------|--------|
 | Notebook | `01_what_is_a_neural_network.ipynb` | ✅ |
 | Notes | `01_what_is_a_neural_network_notes.md` | ✅ |
-| Exercises | `01_what_is_a_neural_network_ex*.py` | ✅ |
+| Exercises | `01_what_is_a_neural_network_ex1_relu_from_scratch.py` | ✅ |
+| Exercises | `01_what_is_a_neural_network_ex2_single_neuron.py` | ✅ |
+| Exercises | `01_what_is_a_neural_network_ex3_two_layer_network.py` | ✅ |
+| Doc | `Deep_Learning_Part_1_What_Is_a_Neural_Network.docx` | ✅ |
 
-### logistic_regression
+### 02_logistic_regression ⏳ In progress — exercises remaining
 | Artifact | File | Status |
 |----------|------|--------|
 | Notebook | `01_binary_classification.ipynb` | ✅ |
@@ -38,14 +41,15 @@
 | Notes | `03_gradient_descent_notes.md` | ✅ |
 | Notes | `04_computation_graph_and_backprop_notes.md` | ✅ |
 | Notes | `05_vectorization_notes.md` | ✅ |
+| Doc | `Deep_Learning_Part_2_Logistic_Regression_as_a_Neural_Network.docx` | ✅ |
+| Doc | `NumPy_Programming_Reference_1_Vectorization_Broadcasting_Array_Safety.docx` | ✅ |
 | Exercises | `01_binary_classification_ex*.py` | ⬜ |
 | Exercises | `02_logistic_regression_ex*.py` | ⬜ |
 | Exercises | `03_gradient_descent_ex*.py` | ⬜ |
 | Exercises | `04_computation_graph_and_backprop_ex*.py` | ⬜ |
 | Exercises | `05_vectorization_ex*.py` | ⬜ |
-| Docs | `Deep_Learning_Part_2_Logistic_Regression.docx` | ⬜ |
 
-### shallow_neural_network
+### 03_shallow_neural_network ⬜ Not started
 | Artifact | File | Status |
 |----------|------|--------|
 | Notebook | `01_neural_network_representation.ipynb` | ⬜ |
@@ -54,7 +58,7 @@
 | Notes | (per notebook) | ⬜ |
 | Exercises | (per notebook) | ⬜ |
 
-### deep_neural_network
+### 04_deep_neural_network ⬜ Not started
 | Artifact | File | Status |
 |----------|------|--------|
 | Notebook | `01_deep_nn_forward_propagation.ipynb` | ⬜ |
