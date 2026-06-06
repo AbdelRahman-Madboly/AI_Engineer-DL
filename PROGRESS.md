@@ -8,7 +8,7 @@
 
 | Course | Status |
 |--------|--------|
-| 01 — Neural Networks and Deep Learning | ⏳ Not started |
+| 01 — Neural Networks and Deep Learning | ⏳ In progress |
 | 02 — Improving Deep Neural Networks | ⏳ Not started |
 | 03 — Structuring ML Projects | ⏳ Not started |
 | 04 — Convolutional Neural Networks | ⏳ Not started |
@@ -21,20 +21,29 @@
 ### intro_to_dl
 | Artifact | File | Status |
 |----------|------|--------|
-| Notebook | `01_what_is_a_neural_network.ipynb` | ⬜ |
-| Notes | `01_what_is_a_neural_network_notes.md` | ⬜ |
-| Exercises | `01_what_is_a_neural_network_ex*.py` | ⬜ |
+| Notebook | `01_what_is_a_neural_network.ipynb` | ✅ |
+| Notes | `01_what_is_a_neural_network_notes.md` | ✅ |
+| Exercises | `01_what_is_a_neural_network_ex*.py` | ✅ |
 
 ### logistic_regression
 | Artifact | File | Status |
 |----------|------|--------|
-| Notebook | `01_binary_classification.ipynb` | ⬜ |
-| Notebook | `02_logistic_regression.ipynb` | ⬜ |
-| Notebook | `03_gradient_descent.ipynb` | ⬜ |
-| Notebook | `04_computation_graph_and_backprop.ipynb` | ⬜ |
-| Notebook | `05_vectorization.ipynb` | ⬜ |
-| Notes | (per notebook) | ⬜ |
-| Exercises | (per notebook) | ⬜ |
+| Notebook | `01_binary_classification.ipynb` | ✅ |
+| Notebook | `02_logistic_regression.ipynb` | ✅ |
+| Notebook | `03_gradient_descent.ipynb` | ✅ |
+| Notebook | `04_computation_graph_and_backprop.ipynb` | ✅ |
+| Notebook | `05_vectorization.ipynb` | ✅ |
+| Notes | `01_binary_classification_notes.md` | ✅ |
+| Notes | `02_logistic_regression_notes.md` | ✅ |
+| Notes | `03_gradient_descent_notes.md` | ✅ |
+| Notes | `04_computation_graph_and_backprop_notes.md` | ✅ |
+| Notes | `05_vectorization_notes.md` | ✅ |
+| Exercises | `01_binary_classification_ex*.py` | ⬜ |
+| Exercises | `02_logistic_regression_ex*.py` | ⬜ |
+| Exercises | `03_gradient_descent_ex*.py` | ⬜ |
+| Exercises | `04_computation_graph_and_backprop_ex*.py` | ⬜ |
+| Exercises | `05_vectorization_ex*.py` | ⬜ |
+| Docs | `Deep_Learning_Part_2_Logistic_Regression.docx` | ⬜ |
 
 ### shallow_neural_network
 | Artifact | File | Status |
