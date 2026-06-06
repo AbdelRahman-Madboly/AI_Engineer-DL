@@ -38,12 +38,12 @@ the same notes style, the same exercise scaffold pattern.
 AI_Engineer-DL/
 │
 ├── 01_neural_networks_and_dl/          ⏳ In progress — start here
-│   ├── intro_to_dl/
+│   ├── intro_to_dl/                    ✅ Complete
 │   │   ├── notebooks/
 │   │   ├── notes/
 │   │   ├── exercises/
 │   │   └── images/
-│   ├── logistic_regression/
+│   ├── logistic_regression/            ⏳ In progress — notebooks + notes done
 │   ├── shallow_neural_network/
 │   ├── deep_neural_network/
 │   └── docs/
@@ -110,7 +110,8 @@ topic_name/
 ├── notebooks/    NN_topic.ipynb
 ├── notes/        NN_topic_notes.md
 ├── exercises/    NN_topic_exN_label.py
-└── images/       NN_topic_description.png
+├── images/       NN_topic_description.png
+└── README.md     section tracker
 ```
 
 Course 3 (`structuring_ml_projects`) is concepts-only — notes and images only.
@@ -178,11 +179,11 @@ Always select **Python (dl_env)** as the kernel before running any notebook.
 
 | Course | Notebooks | Notes | Exercises | Docs | Status |
 |--------|-----------|-------|-----------|------|--------|
-| `01_neural_networks_and_dl` | 0 / 12 | 0 / 12 | 0 / 12 | 0 / 4 | ⏳ |
-| `02_improving_deep_nn` | 0 / 7 | 0 / 7 | 0 / 7 | 0 / 3 | ⏳ |
-| `03_structuring_ml_projects` | — | 0 / 4 | — | 0 / 2 | ⏳ |
-| `04_convolutional_neural_networks` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ |
-| `05_sequence_models` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ |
+| `01_neural_networks_and_dl` | 6 / 12 | 6 / 12 | 0 / 12 | 0 / 4 | ⏳ In progress |
+| `02_improving_deep_nn` | 0 / 7 | 0 / 7 | 0 / 7 | 0 / 3 | ⏳ Not started |
+| `03_structuring_ml_projects` | — | 0 / 4 | — | 0 / 2 | ⏳ Not started |
+| `04_convolutional_neural_networks` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ Not started |
+| `05_sequence_models` | 0 / 8 | 0 / 8 | 0 / 8 | 0 / 4 | ⏳ Not started |
 
 ---
 
@@ -192,7 +193,7 @@ Always select **Python (dl_env)** as the kernel before running any notebook.
 # After every session — specific files only, never git add .
 git add 01_neural_networks_and_dl/logistic_regression/notebooks/01_binary_classification.ipynb
 git add 01_neural_networks_and_dl/logistic_regression/notes/01_binary_classification_notes.md
-git commit -m "feat(dl): add 01_binary_classification — sigmoid, cross-entropy, forward pass"
+git commit -m "feat(dl): logistic_regression/01_binary_classification — feature vectors, matrix stacking X and Y"
 git push
 ```
 
