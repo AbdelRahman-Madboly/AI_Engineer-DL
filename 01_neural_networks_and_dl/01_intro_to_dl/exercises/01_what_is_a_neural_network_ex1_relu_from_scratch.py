@@ -38,8 +38,8 @@ def relu(z):
     Constraint: do NOT use np.maximum inside this function.
     Works on both scalars and NumPy arrays of any shape.
     """
-    # YOUR CODE HERE
-    pass
+    # Using np.where to conditionally return z or 0.0
+    return np.where(z > 0, z, 0.0)
 
 
 # --------------------------------------------------------------------------
@@ -52,8 +52,8 @@ def relu_derivative(Z):
     Returns 1.0 where Z > 0, else 0.0.
     Constraint: no Python for-loops — must be fully vectorized.
     """
-    # YOUR CODE HERE
-    pass
+    # Convert the boolean array (True/False) to floats (1.0/0.0)
+    return (Z > 0).astype(float)
 
 
 # --------------------------------------------------------------------------
@@ -66,7 +66,14 @@ def relu_derivative(Z):
 
 z_values = np.array([-3.0, -1.0, 0.0, 0.5, 1.5, 4.0])
 
-# YOUR CODE HERE
+relu_out = relu(z_values)
+expected_relu = np.maximum(0, z_values)
+relu_matches = np.allclose(relu_out, expected_relu)
+
+print("--- Task 1: relu() ---")
+print(f"Your output : {relu_out}")
+print(f"Expected    : {expected_relu}")
+print(f"Matches?    : {relu_matches}\n")
 
 
 # --------------------------------------------------------------------------
@@ -78,7 +85,14 @@ z_values = np.array([-3.0, -1.0, 0.0, 0.5, 1.5, 4.0])
 #
 # Expected: [0. 0. 0. 1. 1. 1.]
 
-# YOUR CODE HERE
+derivative_out = relu_derivative(z_values)
+expected_deriv = np.array([0., 0., 0., 1., 1., 1.])
+deriv_matches = np.allclose(derivative_out, expected_deriv)
+
+print("--- Task 2: relu_derivative() ---")
+print(f"Your output : {derivative_out}")
+print(f"Expected    : {expected_deriv}")
+print(f"Matches?    : {deriv_matches}\n")
 
 
 # --------------------------------------------------------------------------
@@ -89,9 +103,17 @@ z_values = np.array([-3.0, -1.0, 0.0, 0.5, 1.5, 4.0])
 #
 # Values to test: -2.5, 0.0, 3.7
 
+print("--- Task 3: Scalar tests ---")
 for val in [-2.5, 0.0, 3.7]:
-    # YOUR CODE HERE
-    pass
+    # Compute relu normally
+    val_relu = relu(val)
+    
+    # Wrap val in an array for the derivative as requested by the prompt, 
+    # then extract the scalar result
+    val_deriv = relu_derivative(np.array([val]))[0] 
+    
+    print(f"Value: {val:4.1f} | ReLU: {val_relu:4.1f} | Derivative: {val_deriv:4.1f}")
+print()
 
 
 # --------------------------------------------------------------------------
@@ -101,4 +123,8 @@ for val in [-2.5, 0.0, 3.7]:
 # not matter in practice during neural network training?
 # (Two sentences.)
 
-# YOUR ANSWER HERE
+# Mathematically, ReLU has a sharp "corner" at exactly z=0 where the left limit (0) and right limit (1) differ,
+# making it non-differentiable. 
+# In practice, landing precisely on 0.0 is exceptionally rare due to floating-point math, 
+# and frameworks safely bypass this by assigning an arbitrary valid subgradient (usually 0.0) 
+# so backpropagation never crashes.
