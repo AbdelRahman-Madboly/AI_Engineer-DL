@@ -36,8 +36,8 @@ def relu(z):
     """
     ReLU applied element-wise. max(0, z). No np.maximum allowed.
     """
-    # YOUR CODE HERE
-    pass
+    # Using np.where to conditionally return z or 0.0
+    return np.where(z > 0, z, 0.0)
 
 
 # --------------------------------------------------------------------------
@@ -51,8 +51,13 @@ def neuron_forward(x, w, b):
     Returns (a, z) — both values, because z is needed for backprop later.
     Constraint: use np.dot for the weighted sum; use your relu for activation.
     """
-    # YOUR CODE HERE
-    pass
+    # 1. Compute the weighted sum + bias
+    z = np.dot(w, x) + b
+    
+    # 2. Apply activation function
+    a = relu(z)
+    
+    return a, z
 
 
 # --------------------------------------------------------------------------
@@ -67,7 +72,11 @@ x_A = np.array([1.5, -0.5, 2.0])
 w_A = np.array([0.3, -0.2, 0.5])
 b_A = -0.1
 
-# YOUR CODE HERE
+a_A, z_A = neuron_forward(x_A, w_A, b_A)
+
+print("--- Task 1: Positive Pre-activation ---")
+print(f"z: {z_A:.4f}  (Expected: 1.0500)")
+print(f"a: {a_A:.4f}  (Expected: 1.0500)\n")
 
 
 # --------------------------------------------------------------------------
@@ -80,7 +89,17 @@ b_A = -0.1
 
 b_B = -5.0
 
-# YOUR CODE HERE
+a_B, z_B = neuron_forward(x_A, w_A, b_B)
+
+print("--- Task 2: Negative Pre-activation ---")
+print(f"z: {z_B:.4f}  (Expected: -3.9500)")
+print(f"a: {a_B:.4f}  (Expected: 0.0000)")
+print(f"Is 'a' exactly 0.0? {np.isclose(a_B, 0.0)}")
+
+# Comment: A "dead neuron" means the weighted sum plus bias resulted in a 
+# negative number (z < 0), causing the ReLU activation to clamp the output to zero. 
+# This neuron essentially blocks the signal and contributes nothing to the next layer.
+print()
 
 
 # --------------------------------------------------------------------------
@@ -95,7 +114,11 @@ x_5d = np.array([0.5, -1.0, 2.0, 0.0, -0.3])
 w_5d = np.array([0.1, 0.4, -0.2, 0.6, 0.3])
 b_5d = 0.05
 
-# YOUR CODE HERE
+a_5d, z_5d = neuron_forward(x_5d, w_5d, b_5d)
+
+print("--- Task 3: 5D Shape Check ---")
+print(f"Dimensions of z: {np.ndim(z_5d)} (Type: {type(z_5d)})")
+print(f"Output a: {a_5d:.4f}\n")
 
 
 # --------------------------------------------------------------------------
@@ -105,4 +128,6 @@ b_5d = 0.05
 # What does this tell you about the relationship between input magnitude
 # and neuron output? (Two sentences.)
 
-# YOUR ANSWER HERE
+# The output is determined by the linear combination of inputs (the weighted sum) and the bias, 
+# not just the raw magnitude of the input data. If negative weights or a strongly negative bias dominate the equation,
+# they pull the pre-activation below zero, effectively erasing the input's influence entirely.
