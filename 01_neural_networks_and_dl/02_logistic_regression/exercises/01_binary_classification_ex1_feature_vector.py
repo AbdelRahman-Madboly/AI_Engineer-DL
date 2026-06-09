@@ -62,3 +62,4 @@ IMAGE = np.random.randint(0, 256, size=(64, 64, 3))
 # What goes wrong in matrix arithmetic if you use the rank-1 form? One sentence.
 
 # YOUR ANSWER HERE
+comment to save the streak 
