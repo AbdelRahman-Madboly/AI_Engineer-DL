@@ -36,8 +36,7 @@ def sigmoid(z):
     Works on scalars, 1-D arrays, and 2-D arrays.
     Do not use scipy.special.expit — use np.exp only.
     """
-    # YOUR CODE HERE
-    pass
+    return 1 / (1 + np.exp(-z))
 
 
 # Verify against scipy
@@ -47,10 +46,9 @@ TEST_VALUES = np.array([-10.0, -2.0, -1.0, 0.0, 1.0, 2.0, 10.0])
 scratch_out = sigmoid(TEST_VALUES)
 library_out = expit(TEST_VALUES)
 
-# Print both arrays and the allclose result.
-# Expected: all np.allclose checks print True.
-
-# YOUR CODE HERE
+print(f"scratch_out : {scratch_out}")
+print(f"library_out : {library_out}")
+print(f"allclose    : {np.allclose(scratch_out, library_out)}")   # Expected True
 
 
 # --------------------------------------------------------------------------
@@ -63,17 +61,18 @@ def sigmoid_derivative(z):
     You may call sigmoid() inside this function.
     Do not re-derive from scratch using np.exp directly.
     """
-    # YOUR CODE HERE
-    pass
+    s = sigmoid(z)
+    return s * (1 - s)
 
 
 # Test and verify:
 #   sigmoid_derivative(0)  → expected exactly 0.25
 #   sigmoid_derivative(2)  → expected ~0.1050
 #   sigmoid_derivative(-2) → expected ~0.1050  (symmetric)
-# Verify each with np.isclose. Print True/False for each.
 
-# YOUR CODE HERE
+print(f"sigmoid_derivative(0)  ≈ 0.25   : {np.isclose(sigmoid_derivative(0),   0.25,   atol=1e-6)}")
+print(f"sigmoid_derivative(2)  ≈ 0.1050 : {np.isclose(sigmoid_derivative(2),   0.1050, atol=1e-4)}")
+print(f"sigmoid_derivative(-2) ≈ 0.1050 : {np.isclose(sigmoid_derivative(-2),  0.1050, atol=1e-4)}")
 
 
 # --------------------------------------------------------------------------
@@ -84,4 +83,7 @@ def sigmoid_derivative(z):
 # Why does this shrinking gradient cause a problem in deep networks that use
 # sigmoid activations in every hidden layer? One sentence.
 
-# YOUR ANSWER HERE
+# In a deep network the chain rule multiplies one sigmoid derivative per layer,
+# and because each factor is at most 0.25, the product shrinks exponentially as
+# depth increases — making the gradients reaching early layers vanishingly small
+# (the vanishing gradient problem), which prevents those layers from learning.
