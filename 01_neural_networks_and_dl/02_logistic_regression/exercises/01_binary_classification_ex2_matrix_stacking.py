@@ -37,17 +37,15 @@ m = 8
 H, W, C = 32, 32, 3
 IMAGES_LIST = [np.random.randint(0, 256, size=(H, W, C)) for _ in range(m)]
 LABELS = np.array([1, 0, 1, 1, 0, 0, 1, 0])   # ground-truth labels
-#
-# Steps:
-#   1. Compute NX = H × W × C.
-#   2. Flatten each image in IMAGES_LIST into a column vector of shape (NX, 1).
-#   3. Stack all column vectors horizontally with np.hstack() → X of shape (NX, m).
-#   4. Build Y of shape (1, m) from LABELS using .reshape(1, -1).
-#   5. Print X.shape and Y.shape.
-#
-# Expected result: X shape (3072, 8) | Y shape (1, 8)
 
-# YOUR CODE HERE
+NX = H * W * C                                          # 3072
+
+# Flatten each image to (NX, 1) and hstack into (NX, m)
+X = np.hstack([img.reshape(NX, 1) for img in IMAGES_LIST])
+Y = LABELS.reshape(1, -1)
+
+print(f"X shape: {X.shape}")   # Expected (3072, 8)
+print(f"Y shape: {Y.shape}")   # Expected (1, 8)
 
 
 # --------------------------------------------------------------------------
@@ -58,16 +56,12 @@ LABELS = np.array([1, 0, 1, 1, 0, 0, 1, 0])   # ground-truth labels
 # Provided batch array:
 np.random.seed(7)
 BATCH = np.random.randint(0, 256, size=(m, H, W, C))
-#
-# Steps:
-#   1. Reshape BATCH to shape (m, NX) → then transpose to (NX, m) to get X_direct.
-#      Do this in one expression: BATCH.reshape(m, -1).T
-#   2. Assert X_direct.shape == (NX, m).
-#   3. Verify np.allclose(X, X_direct) — both methods should give the same matrix
-#      since IMAGES_LIST was built from the same seed as BATCH.
-#   4. Print the allclose result.
 
-# YOUR CODE HERE
+X_direct = BATCH.reshape(m, -1).T          # shape (NX, m) in one expression
+
+assert X_direct.shape == (NX, m), f"Expected ({NX}, {m}), got {X_direct.shape}"
+
+print(f"allclose(X, X_direct): {np.allclose(X, X_direct)}")   # Expected True
 
 
 # --------------------------------------------------------------------------
@@ -81,7 +75,9 @@ BATCH = np.random.randint(0, 256, size=(m, H, W, C))
 # --------------------------------------------------------------------------
 # To keep the column dimension, use X[:, 2:3] rather than X[:, 2].
 
-# YOUR CODE HERE
+x3 = X[:, 2:3]   # shape (NX, 1)
+print(f"x3.shape: {x3.shape}")
+assert x3.shape == (NX, 1), f"Expected ({NX}, 1), got {x3.shape}"
 
 
 # --------------------------------------------------------------------------
@@ -91,4 +87,8 @@ BATCH = np.random.randint(0, 256, size=(m, H, W, C))
 # rather than as rows (m × nₓ)? What specific operation becomes cleaner?
 # Two sentences.
 
-# YOUR ANSWER HERE
+# Stacking examples as columns allows the linear forward pass Z = W.T @ X + b
+# to be written as a single matrix multiply that naturally broadcasts the bias b
+# across all m examples at once, giving Z of shape (n_out, m) without any
+# transposition. If examples were rows, every weight matrix and bias operation
+# would need extra transposes, complicating both code and gradient derivations.
