@@ -40,7 +40,12 @@ import numpy as np
 np.random.seed(0)
 IMAGE = np.random.randint(0, 256, size=(64, 64, 3))
 
-# YOUR CODE HERE
+NX = IMAGE.shape[0] * IMAGE.shape[1] * IMAGE.shape[2]   # 64 * 64 * 3 = 12288
+X  = IMAGE.reshape(NX, 1)
+
+print(f"IMAGE.shape : {IMAGE.shape}")
+print(f"NX          : {NX}")
+print(f"X.shape     : {X.shape}")
 
 
 # --------------------------------------------------------------------------
@@ -52,7 +57,8 @@ IMAGE = np.random.randint(0, 256, size=(64, 64, 3))
 #
 # Also verify X.shape == (12288, 1) with an assert statement.
 
-# YOUR CODE HERE
+print(f"Element count preserved: {np.isclose(NX, X.size)}")
+assert X.shape == (12288, 1), f"Expected (12288, 1), got {X.shape}"
 
 
 # --------------------------------------------------------------------------
@@ -61,5 +67,7 @@ IMAGE = np.random.randint(0, 256, size=(64, 64, 3))
 # Why do we use shape (nₓ, 1) for the feature vector instead of shape (nₓ,)?
 # What goes wrong in matrix arithmetic if you use the rank-1 form? One sentence.
 
-# YOUR ANSWER HERE
-comment to save the streak 
+# Using (nₓ, 1) keeps the vector 2-D so matrix operations like W.T @ x produce
+# the correct (1, 1) scalar output; the rank-1 form (nₓ,) causes NumPy broadcasting
+# to behave unexpectedly — for example, W.T @ x yields shape (1, nₓ) instead of
+# a scalar, silently producing wrong results instead of raising a shape error.
