@@ -35,8 +35,7 @@ import matplotlib.pyplot as plt
 
 def sigmoid(z):
     """σ(z) = 1 / (1 + exp(-z)). Works element-wise. Do not use scipy."""
-    # YOUR CODE HERE
-    pass
+    return 1 / (1 + np.exp(-z))
 
 
 # Provided pre-trained weights and dataset (do not change):
@@ -61,82 +60,89 @@ X_EMAILS = np.array([
 
 Y_TRUE = np.array([[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]])   # true labels, shape (1, 10)
 
-# Verify dataset shapes — assert X_EMAILS.shape == (NX, M) and Y_TRUE.shape == (1, M).
-# Print both shapes.
-
-# YOUR CODE HERE
+assert X_EMAILS.shape == (NX, M), f"Expected ({NX}, {M}), got {X_EMAILS.shape}"
+assert Y_TRUE.shape   == (1,  M), f"Expected (1, {M}), got {Y_TRUE.shape}"
+print(f"X_EMAILS.shape : {X_EMAILS.shape}")
+print(f"Y_TRUE.shape   : {Y_TRUE.shape}")
 
 
 # --------------------------------------------------------------------------
 # Task 2 — Full forward pass
 # --------------------------------------------------------------------------
-# Steps:
-#   1. Z = W.T @ X_EMAILS + B          shape must be (1, M)
-#   2. A = sigmoid(Z)                   shape must be (1, M)
-#   3. Assert all values in A are in (0, 1):
-#      assert np.all(A > 0) and np.all(A < 1)
-#   4. Print Z (rounded to 3 dp) and A (rounded to 3 dp).
+Z = W.T @ X_EMAILS + B     # shape (1, M)
+A = sigmoid(Z)              # shape (1, M)
 
-# YOUR CODE HERE
+assert np.all(A > 0) and np.all(A < 1), "Probabilities must be in (0, 1)"
+
+print(f"\nZ (3 dp) : {Z.round(3)}")
+print(f"A (3 dp) : {A.round(3)}")
 
 
 # --------------------------------------------------------------------------
 # Task 3 — Threshold and compute accuracy
 # --------------------------------------------------------------------------
-# Convert probabilities to binary predictions:
-#   Y_PRED = (A >= 0.5).astype(int)    shape (1, M)
-#
-# Compute accuracy:
-#   ACCURACY = np.mean(Y_PRED == Y_TRUE)
-#
-# Print Y_PRED, Y_TRUE, and ACCURACY.
-# Also print the number of correct predictions.
+Y_PRED   = (A >= 0.5).astype(int)                  # shape (1, M)
+ACCURACY = np.mean(Y_PRED == Y_TRUE)
+n_correct = int(np.sum(Y_PRED == Y_TRUE))
 
-# YOUR CODE HERE
+print(f"\nY_PRED    : {Y_PRED}")
+print(f"Y_TRUE    : {Y_TRUE}")
+print(f"Accuracy  : {ACCURACY:.2f}")
+print(f"Correct   : {n_correct} / {M}")
 
 
 # --------------------------------------------------------------------------
 # Task 4 — Manual verification for one example
 # --------------------------------------------------------------------------
-# For the first email (index 0), verify z and ŷ by hand.
-#
-# Manual calculation (fill in the arithmetic):
-# z = 1.2*0.9 + (-0.8)*0.8 + 0.5*0.7 + 0.3*0.6 + (-1.0)*0.9 + (-0.4)
-#   = ? + ? + ? + ? + ? + ?  =  ?
-#
-# Write the step-by-step arithmetic as a comment.
-# Then verify your manual z matches Z[0, 0] using np.isclose.
-# Print True/False.
-
-# Manual z for email 0:
+# Manual calculation for email index 0:
 # z = 1.2*(0.9) + (-0.8)*(0.8) + 0.5*(0.7) + 0.3*(0.6) + (-1.0)*(0.9) + (-0.4)
-#   = ? + ? + ? + ? + ? + ? = ?
+#   = 1.08  +  (-0.64)  +  0.35  +  0.18  +  (-0.90)  +  (-0.40)
+#   = 1.08 - 0.64 + 0.35 + 0.18 - 0.90 - 0.40
+#   = -0.33
 
-# YOUR CODE HERE
+manual_z0 = (1.2 * 0.9) + (-0.8 * 0.8) + (0.5 * 0.7) + (0.3 * 0.6) + (-1.0 * 0.9) + (-0.4)
+print(f"\nManual z for email 0 : {manual_z0:.4f}")
+print(f"Z[0, 0]              : {Z[0, 0]:.4f}")
+print(f"Match                : {np.isclose(float(Z[0, 0]), manual_z0)}")   # True
 
 
 # --------------------------------------------------------------------------
 # Task 5 — Visualisation
 # --------------------------------------------------------------------------
-# Two-panel figure:
-#
-#   Left panel: horizontal bar chart of predicted probabilities A[0, :].
-#     Y-axis: email index labels ["Email 1", "Email 2", ..., "Email 10"]
-#     X-axis: "P(spam)"  range [0, 1]
-#     Colour each bar: steelblue if Y_TRUE[0,i]==1 else coral
-#     Add vertical dashed line at x=0.5 labelled "decision boundary"
-#     Title: "Spam Classifier: Predicted P(spam) per Email"
-#
-#   Right panel: sigmoid curve for the range z ∈ [−4, 4].
-#     Plot σ(z) vs z. Mark the 10 email z-values as scatter points.
-#     Colour each point: steelblue if true label==1 else coral
-#     Horizontal dashed grey line at y=0.5.
-#     X-axis: "z = wᵀx + b", Y-axis: "σ(z)", Title: "Sigmoid Output per Email"
-#     Add legend: "Spam (y=1)" and "Real (y=0)"
-#
-# Save to: ../images/02_logistic_regression_predictions.png
+fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
-# YOUR CODE HERE
+email_labels = [f"Email {i+1}" for i in range(M)]
+bar_colors   = ["steelblue" if Y_TRUE[0, i] == 1 else "coral" for i in range(M)]
+
+# Left panel — horizontal bar chart of P(spam)
+axes[0].barh(email_labels, A[0, :], color=bar_colors)
+axes[0].axvline(0.5, color="black", linestyle="--", linewidth=1.2, label="decision boundary")
+axes[0].set_xlabel("P(spam)")
+axes[0].set_xlim(0, 1)
+axes[0].set_title("Spam Classifier: Predicted P(spam) per Email")
+axes[0].legend()
+axes[0].invert_yaxis()
+
+# Right panel — sigmoid curve with email z-values overlaid
+z_range   = np.linspace(-4, 4, 300)
+axes[1].plot(z_range, sigmoid(z_range), color="black", linewidth=1.5, label="σ(z)")
+axes[1].axhline(0.5, color="grey", linestyle="--", linewidth=1.0)
+
+spam_mask = Y_TRUE[0, :] == 1
+axes[1].scatter(Z[0, spam_mask],  A[0, spam_mask],  color="steelblue",
+                zorder=5, label="Spam (y=1)")
+axes[1].scatter(Z[0, ~spam_mask], A[0, ~spam_mask], color="coral",
+                zorder=5, label="Real (y=0)")
+
+axes[1].set_xlabel("z = wᵀx + b")
+axes[1].set_ylabel("σ(z)")
+axes[1].set_title("Sigmoid Output per Email")
+axes[1].legend()
+
+plt.tight_layout()
+plt.savefig("../images/02_logistic_regression_predictions.png", dpi=150)
+plt.show()
+print("Plot saved to ../images/02_logistic_regression_predictions.png")
 
 
 # --------------------------------------------------------------------------
@@ -148,4 +154,11 @@ Y_TRUE = np.array([[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]])   # true labels, shape (1, 1
 # consideration might make you choose a different threshold?
 # Two to three sentences.
 
-# YOUR ANSWER HERE
+# The threshold at 0.5 treats false positives (real email flagged as spam)
+# and false negatives (spam reaching the inbox) as equally costly, but in
+# practice those costs differ: a user losing an important email to the spam
+# folder is often more disruptive than letting occasional spam through.
+# Lowering the threshold raises recall for spam but increases false positives,
+# while raising it protects real emails at the cost of missing more spam —
+# so the right operating point depends on the relative cost of each error type
+# and is typically tuned using a precision-recall or ROC curve on a validation set.
