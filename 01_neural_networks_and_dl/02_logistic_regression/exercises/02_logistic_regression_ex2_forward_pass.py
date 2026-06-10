@@ -32,30 +32,30 @@ def sigmoid(z):
 # --------------------------------------------------------------------------
 # Task 1 — Compute the pre-activation Z for a single example
 # --------------------------------------------------------------------------
-# Provided parameters and example:
-W = np.array([[0.5], [-0.3], [0.8]])   # shape (3, 1)
-B = 0.1                                 # scalar bias
-X1 = np.array([[1.0], [2.0], [-1.0]])  # single example, shape (3, 1)
-#
-# Steps:
-#   1. Compute Z1 = W.T @ X1 + B  (use @ operator)
-#   2. Compute A1 = sigmoid(Z1)
-#   3. Manual calculation:
-#      z = 0.5*1 + (-0.3)*2 + 0.8*(-1) + 0.1 = ?   (fill in the value)
-#      Write the step-by-step arithmetic as a comment below.
-#   4. Verify np.isclose(float(Z1), your_manual_z) — print True/False.
-#   5. Print Z1, A1, and Z1.shape.
-#
-# Manual calculation:
-# z = 0.5*(1.0) + (-0.3)*(2.0) + 0.8*(-1.0) + 0.1 = ?
+W  = np.array([[0.5], [-0.3], [0.8]])   # shape (3, 1)
+B  = 0.1                                 # scalar bias
+X1 = np.array([[1.0], [2.0], [-1.0]])   # single example, shape (3, 1)
 
-# YOUR CODE HERE
+Z1 = W.T @ X1 + B      # shape (1, 1)
+A1 = sigmoid(Z1)        # shape (1, 1)
+
+# Manual calculation:
+# z = 0.5*(1.0) + (-0.3)*(2.0) + 0.8*(-1.0) + 0.1
+#   = 0.5  +  (-0.6)  +  (-0.8)  +  0.1
+#   = 0.5 - 0.6 - 0.8 + 0.1
+#   = -0.8
+manual_z = 0.5 * 1.0 + (-0.3) * 2.0 + 0.8 * (-1.0) + 0.1    # = -0.8
+
+print(f"Z1           : {Z1}")
+print(f"A1           : {A1}")
+print(f"Z1.shape     : {Z1.shape}")
+print(f"manual z     : {manual_z}")
+print(f"Z1 == manual : {np.isclose(Z1.item(), manual_z)}")    # Expected True
 
 
 # --------------------------------------------------------------------------
 # Task 2 — Vectorised forward pass for m examples
 # --------------------------------------------------------------------------
-# Provided mini dataset:
 np.random.seed(42)
 NX, M = 3, 6
 X_BATCH = np.array([
@@ -64,32 +64,29 @@ X_BATCH = np.array([
     [-1.0,  1.0,  2.0,  0.5, -1.5,  1.0],
 ])                                          # shape (3, 6)
 Y_BATCH = np.array([[1, 0, 1, 1, 0, 0]])   # shape (1, 6)
-#
-# Steps:
-#   1. Z_batch = W.T @ X_BATCH + B          shape must be (1, M)
-#   2. A_batch = sigmoid(Z_batch)            shape must be (1, M)
-#   3. Assert Z_batch.shape == (1, M) and A_batch.shape == (1, M).
-#   4. Count how many predictions cross the 0.5 decision boundary
-#      (i.e. A_batch >= 0.5 implies predicted class 1).
-#      Print predicted labels and compare to Y_BATCH.
 
-# YOUR CODE HERE
+Z_batch = W.T @ X_BATCH + B                # shape (1, M)
+A_batch = sigmoid(Z_batch)                 # shape (1, M)
+
+assert Z_batch.shape == (1, M), f"Expected (1, {M}), got {Z_batch.shape}"
+assert A_batch.shape == (1, M), f"Expected (1, {M}), got {A_batch.shape}"
+
+Y_PRED_BATCH = (A_batch >= 0.5).astype(int)
+n_correct    = int(np.sum(Y_PRED_BATCH == Y_BATCH))
+
+print(f"\nZ_batch (3 dp) : {Z_batch.round(3)}")
+print(f"A_batch (3 dp) : {A_batch.round(3)}")
+print(f"Predicted      : {Y_PRED_BATCH}")
+print(f"True labels    : {Y_BATCH}")
+print(f"Correct        : {n_correct} / {M}")
 
 
 # --------------------------------------------------------------------------
 # Task 3 — Verify the first column against the single-example result
 # --------------------------------------------------------------------------
-# The first column of Z_batch should equal Z1 (from Task 1), because
-# X_BATCH[:, 0:1] == X1.
-# Verify: np.allclose(Z_batch[:, 0:1], Z1)
-# Print True/False.
-#
-# Hint (read only if stuck)
-# --------------------------------------------------------------------------
-# Use Z_batch[:, 0:1] (shape 1×1) not Z_batch[:, 0] (rank-1 shape (1,))
-# to keep the matrix shape consistent for allclose comparison.
+# X_BATCH[:, 0:1] == X1, so Z_batch[:, 0:1] must equal Z1.
 
-# YOUR CODE HERE
+print(f"\nallclose(Z_batch[:, 0:1], Z1): {np.allclose(Z_batch[:, 0:1], Z1)}")   # True
 
 
 # --------------------------------------------------------------------------
@@ -99,4 +96,9 @@ Y_BATCH = np.array([[1, 0, 1, 1, 0, 0]])   # shape (1, 6)
 # Explain what NumPy broadcasting does here — what shape does B effectively
 # become, and why does this work? Two sentences.
 
-# YOUR ANSWER HERE
+# NumPy broadcasting treats the scalar B as if it had shape (1, 1), then
+# stretches it to match the (1, M) shape of W.T @ X_BATCH by replicating
+# the value across all M columns — so each of the M pre-activations gets
+# the same bias added without the programmer needing to construct a bias vector.
+# This works because the shapes are compatible: every dimension of B (treated
+# as 1) can be broadcast to the corresponding dimension of the matrix (1 and M).
