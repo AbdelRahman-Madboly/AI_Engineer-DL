@@ -31,90 +31,89 @@ import matplotlib.pyplot as plt
 # --------------------------------------------------------------------------
 # Task 1 — Build the raw frame batch
 # --------------------------------------------------------------------------
-# Simulate a batch of m=16 deepfake detection frames (48×48 RGB images).
-# Half are labelled deepfake (1), half are real (0).
-#
-# Provided:
 np.random.seed(42)
 m = 16
 H, W, C = 48, 48, 3
 FRAMES = np.random.randint(0, 256, size=(m, H, W, C))    # raw batch
 LABELS_RAW = np.array([1]*8 + [0]*8)                     # 8 deepfake, 8 real
-#
-# Steps:
-#   1. Compute NX = H × W × C.
-#   2. Reshape FRAMES to X of shape (NX, m) in one expression.
-#   3. Reshape LABELS_RAW to Y of shape (1, m).
-#   4. Print NX, X.shape, Y.shape.
-#
-# Expected result: NX = 6912 | X shape (6912, 16) | Y shape (1, 16)
 
-# YOUR CODE HERE
+NX = H * W * C                                  # 6912
+X  = FRAMES.reshape(m, -1).T                    # shape (NX, m) — one expression
+Y  = LABELS_RAW.reshape(1, m)                   # shape (1, m)
+
+print(f"NX      : {NX}")
+print(f"X.shape : {X.shape}")    # Expected (6912, 16)
+print(f"Y.shape : {Y.shape}")    # Expected (1, 16)
 
 
 # --------------------------------------------------------------------------
 # Task 2 — Normalise pixel values to [0, 1]
 # --------------------------------------------------------------------------
-# Neural networks train faster when inputs are in [0, 1].
-# Divide X by 255 to get X_norm.
-# Verify: np.allclose(X_norm.min(), 0.0, atol=0.01) and
-#         np.allclose(X_norm.max(), 1.0, atol=0.01) — print both checks.
-#
-# Do not use a for-loop — one vectorised operation.
+X_norm = X / 255                                 # vectorised, no loop
 
-# YOUR CODE HERE
+print(f"X_norm.min() ≈ 0.0 : {np.allclose(X_norm.min(), 0.0, atol=0.01)}")
+print(f"X_norm.max() ≈ 1.0 : {np.allclose(X_norm.max(), 1.0, atol=0.01)}")
 
 
 # --------------------------------------------------------------------------
 # Task 3 — Verify dataset integrity
 # --------------------------------------------------------------------------
-# Run the following checks and print each result:
-#   a. X_norm.shape == (NX, m)              → assert + print
-#   b. Y.shape == (1, m)                    → assert + print
-#   c. Number of deepfake labels (Y == 1)   → np.sum, compare to 8
-#   d. Number of real labels (Y == 0)       → np.sum, compare to 8
-#   e. Per-feature mean across m examples: MEAN_VEC = X_norm.mean(axis=1)
-#      MEAN_VEC.shape should be (NX,) — print shape and mean of MEAN_VEC.
-#      Expected: mean of MEAN_VEC ≈ 0.5 (random uniform pixels)
-#      Verify with np.isclose(MEAN_VEC.mean(), 0.5, atol=0.05).
+assert X_norm.shape == (NX, m),  f"Expected ({NX}, {m}), got {X_norm.shape}"
+print(f"X_norm.shape == ({NX}, {m})   : True")
 
-# YOUR CODE HERE
+assert Y.shape == (1, m),        f"Expected (1, {m}), got {Y.shape}"
+print(f"Y.shape == (1, {m})         : True")
+
+n_deepfake = int(np.sum(Y == 1))
+n_real     = int(np.sum(Y == 0))
+print(f"Deepfake labels (Y=1) : {n_deepfake}  (expected 8)")
+print(f"Real labels     (Y=0) : {n_real}  (expected 8)")
+
+MEAN_VEC = X_norm.mean(axis=1)                   # shape (NX,)
+print(f"MEAN_VEC.shape        : {MEAN_VEC.shape}")
+print(f"mean of MEAN_VEC      : {MEAN_VEC.mean():.4f}  (expected ≈ 0.5)")
+print(f"MEAN_VEC.mean() ≈ 0.5 : {np.isclose(MEAN_VEC.mean(), 0.5, atol=0.05)}")
 
 
 # --------------------------------------------------------------------------
 # Task 4 — Retrieve and inspect one example
 # --------------------------------------------------------------------------
-# Extract the 5th example (index 4) as:
-#   (a) a column vector x5 of shape (NX, 1) — NOT rank-1
-#   (b) its original frame back as a (H, W, C) array x5_frame
-#       using .reshape(H, W, C)
-# Print x5.shape and x5_frame.shape.
-# Assert x5.shape == (NX, 1).
-# Verify np.allclose(x5.reshape(H, W, C), x5_frame) and print True/False.
+x5       = X_norm[:, 4:5]                        # shape (NX, 1) — column slice
+x5_frame = x5.reshape(H, W, C)                  # shape (H, W, C)
 
-# YOUR CODE HERE
+print(f"x5.shape       : {x5.shape}")
+print(f"x5_frame.shape : {x5_frame.shape}")
+assert x5.shape == (NX, 1), f"Expected ({NX}, 1), got {x5.shape}"
+print(f"reshape round-trip matches: {np.allclose(x5.reshape(H, W, C), x5_frame)}")
 
 
 # --------------------------------------------------------------------------
 # Task 5 — Visualisation
 # --------------------------------------------------------------------------
-# Two-panel figure:
-#   Left panel: bar chart — class distribution (deepfake vs real).
-#     X-axis: "Class", labels ["Deepfake (y=1)", "Real (y=0)"]
-#     Y-axis: "Count"
-#     Title: "WaveMamba-DF Batch: Class Distribution"
-#     Bar colours: ['steelblue', 'coral']
-#
-#   Right panel: histogram of per-feature means (MEAN_VEC from Task 3e).
-#     X-axis: "Feature Mean (normalised pixel)"
-#     Y-axis: "Frequency"
-#     Title: "Distribution of Feature Means Across nₓ Features"
-#     Use 40 bins, colour 'steelblue'.
-#     Add a vertical dashed red line at x=0.5 labelled "expected ≈ 0.5".
-#
-# Save to: ../images/01_binary_classification_batch_stats.png
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
-# YOUR CODE HERE
+# Left panel — class distribution bar chart
+axes[0].bar(
+    ["Deepfake (y=1)", "Real (y=0)"],
+    [n_deepfake, n_real],
+    color=["steelblue", "coral"],
+)
+axes[0].set_xlabel("Class")
+axes[0].set_ylabel("Count")
+axes[0].set_title("WaveMamba-DF Batch: Class Distribution")
+
+# Right panel — histogram of per-feature means
+axes[1].hist(MEAN_VEC, bins=40, color="steelblue", edgecolor="white")
+axes[1].axvline(0.5, color="red", linestyle="--", label="expected ≈ 0.5")
+axes[1].set_xlabel("Feature Mean (normalised pixel)")
+axes[1].set_ylabel("Frequency")
+axes[1].set_title("Distribution of Feature Means Across nₓ Features")
+axes[1].legend()
+
+plt.tight_layout()
+plt.savefig("../images/01_binary_classification_batch_stats.png", dpi=150)
+plt.show()
+print("Plot saved to ../images/01_binary_classification_batch_stats.png")
 
 
 # --------------------------------------------------------------------------
@@ -125,4 +124,10 @@ LABELS_RAW = np.array([1]*8 + [0]*8)                     # 8 deepfake, 8 real
 # What would happen to the gradient updates if pixel values stayed in [0, 255]?
 # Two to three sentences.
 
-# YOUR ANSWER HERE
+# When pixel values stay in [0, 255] the gradients with respect to the weights
+# are proportional to those large input magnitudes, so weight updates become
+# enormous and the loss surface is poorly scaled — different features may have
+# wildly different gradient scales, forcing a tiny learning rate and slow convergence.
+# Normalising to [0, 1] keeps all input dimensions on the same scale, so gradient
+# descent takes balanced steps in every direction and converges in far fewer iterations
+# without requiring a very small or carefully tuned learning rate.
